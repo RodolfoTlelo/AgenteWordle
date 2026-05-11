@@ -1,0 +1,18 @@
+{
+  "total_games": 50,
+  "solved": 50,
+  "failed": 0,
+  "win_rate_pct": 100.0,
+  "avg_attempts_when_solved": 3.5,
+  "avg_decision_time_ms": 251.698,
+  "attempt_distribution": {
+    "1": 0,
+    "2": 0,
+    "3": 26,
+    "4": 23,
+    "5": 1,
+    "6": 0,
+    "7": 0
+  },
+  "failed_words": []
+}

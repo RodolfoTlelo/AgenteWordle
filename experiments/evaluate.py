@@ -1,21 +1,3 @@
-"""
-evaluate.py  –  Batch experiment runner
-Runs the agent against N random words and computes performance metrics.
-
-Metrics collected (as per project proposal):
-  1. Average number of attempts to find the hidden word.
-  2. Average decision time per turn (seconds).
-  3. Win rate (solved within 6 attempts).
-  4. Distribution of attempts (histogram).
-
-Usage
------
-    python evaluate.py                   # 200 random words
-    python evaluate.py --n 500           # 500 random words
-    python evaluate.py --n 100 --seed 42 # reproducible run
-    python evaluate.py --full            # entire vocabulary (~2500 words, slow)
-"""
-
 import sys
 import os
 import time

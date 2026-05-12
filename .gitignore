@@ -1,1 +1,6 @@
 # Python
+__pycache__/
+
+# Generated experiment results
+# Ignore JSON files but keep the directory structure with .gitkeep
+results/*.json

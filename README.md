@@ -6,7 +6,7 @@ Agente inteligente que resuelve el juego **Wordle** usando maximización de entr
 
 ## Descripción del proyecto
 
-El agente implementa la arquitectura propuesta en la Actividad 2:
+El agente implementa la siguiente arquitectura:
 
 ```
 Percepción → Estado → Decisión → Acción
@@ -16,7 +16,7 @@ Percepción → Estado → Decisión → Acción
 |------------|----------------|
 | **Estado** `S = (V, H)` | `V` – set de palabras candidatas; `H` – historial de intentos + patrones de color |
 | **Acción** `a` | Palabra de 5 letras elegida para ingresar al tablero |
-| **Decisión** `a* = argmax f(s, a)` | Entropía de Shannon sobre la distribución de patrones de color posibles |
+| **Decisión** `a* = argmax f(s, a)` | Funcion de decision sobre la distribución de patrones de color posibles |
 | **Conocimiento** | Lógica proposicional: eliminación dura de candidatos incompatibles con el feedback recibido |
 
 ### Función de decisión
@@ -54,11 +54,6 @@ wordle_agent/
 ## Dependencias
 
 Solo librería estándar de Python 3.10+. No se requieren paquetes externos.
-
-```
-python >= 3.10
-```
-
 ---
 
 ## Cómo ejecutar
@@ -138,31 +133,3 @@ Sobre 200 palabras aleatorias con seed=42:
 |---------|--------------|
 | Win rate | ~98–100 % |
 | Promedio de intentos | ~3.6–3.9 |
-| Tiempo de decisión promedio | <50 ms / turno |
-
----
-
-## Arquitectura – decisión tree (simplificada)
-
-```
-Estado inicial V (2499 palabras)
-        │
-        ▼  Turno 1: a* = "crane"  (alta entropía por defecto)
-   Percepción (5 colores)
-        │
-        ▼  Filtrar V → V' ⊆ V
-   |V'| ≤ 6? ──Yes──► Evaluar solo candidatos
-        │ No
-        ▼  Evaluar vocabulario completo, bonus a candidatos
-   a* = argmax H(a)
-        │
-        ▼  ... repetir hasta verde×5 o 6 intentos
-```
-
----
-
-## Limitaciones
-
-- El cálculo de entropía sobre el vocabulario completo (turno 2+) puede tardar ~0.5–2 seg por turno en hardware modesto.
-- El agente no tiene en modo difícil de Wordle (donde los intentos deben usar las letras ya reveladas); añadirlo requeriría restringir `search_space = candidates` siempre.
-- El dataset de 2499 palabras es el vocabulario *posible* de Wordle; el juego real usa un subconjunto de ~2315 palabras objetivo.

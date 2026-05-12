@@ -1,31 +1,9 @@
-"""
-agent.py
-The Wordle Agent – ties together perception, state, and decision.
-
-Architecture:  Perception → State → Decision → Action
-
-With the richer wordle.csv dataset the agent now maintains:
-  - answer_words  : candidate words that can BE the answer (~2315)  → used as V
-  - probe_words   : full valid vocabulary (~12972)                   → search space for f(s,a)
-
-This mirrors the real Wordle ruleset and improves performance.
-"""
-
 from state import AgentState, Pattern, filter_vocabulary
 from decision import choose_action
 from vocabulary import load_vocabulary
 
 
 class WordleAgent:
-    """
-    Intelligent agent that plays Wordle using entropy-based decision making.
-
-    Attributes
-    ----------
-    answer_words  : list[str]  – words eligible to be the hidden answer (V₀)
-    probe_words   : list[str]  – all valid guesses (search space for f)
-    state         : AgentState – current S = (V, H)
-    """
 
     MAX_ATTEMPTS = 6
 

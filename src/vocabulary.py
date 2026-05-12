@@ -1,37 +1,8 @@
-"""
-vocabulary.py
-Loads and manages the word lists from the Wordle dataset.
-
-Supports two dataset formats:
-
-1. wordle.csv  (primary, preferred)
-   Columns: word, occurrence, day
-   - 'word'       : 5-letter string
-   - 'occurrence' : corpus frequency (float)
-   - 'day'        : Wordle puzzle day number (non-empty → official answer word)
-
-   This gives us two distinct sets:
-     • answer_words  – ~2315 words that can BE the hidden answer (have a 'day')
-     • probe_words   – all ~12972 words valid to guess (full vocabulary)
-
-2. 5_letters.csv  (legacy fallback)
-   Columns: 1,2,3,4,5  (one letter per column)
-
-The agent uses answer_words as V (candidates) and probe_words as the
-search space for information-maximising guesses.
-"""
-
 import csv
 import os
 
 
 def load_wordle_csv(filepath: str) -> tuple[list[str], list[str]]:
-    """
-    Parse wordle.csv.
-    Returns (answer_words, probe_words).
-    answer_words: words with a day value (official Wordle answers).
-    probe_words:  all valid words (full guessing vocabulary).
-    """
     answer_words: list[tuple[int, str]] = []
     probe_words:  list[str] = []
 
@@ -54,7 +25,6 @@ def load_wordle_csv(filepath: str) -> tuple[list[str], list[str]]:
 
 
 def load_legacy_csv(filepath: str) -> list[str]:
-    """Parse 5_letters.csv (columns 1-5). Returns flat word list."""
     words = []
     with open(filepath, newline="", encoding="utf-8") as f:
         reader = csv.reader(f)
@@ -88,11 +58,6 @@ def _looks_like_wordle_csv(path: str) -> bool:
 
 
 def load_vocabulary(filepath: str | None = None) -> tuple[list[str], list[str]]:
-    """
-    Load vocabulary. Returns (answer_words, probe_words).
-    Priority: wordle.csv > 5_letters.csv.
-    For legacy format, answer_words == probe_words.
-    """
     path = filepath
 
     if path is None:

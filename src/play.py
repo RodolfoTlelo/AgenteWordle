@@ -1,21 +1,3 @@
-"""
-play.py  –  Interactive / demo mode
-
-Modes
------
-  (default)          : Agent suggests guesses; you enter feedback from a real Wordle game.
-  --auto             : Agent self-plays against a random answer word.
-  --auto --secret X  : Agent self-plays against a specific word.
-  --today            : Show what today's guess would be (turn 1 suggestion).
-
-Usage
------
-    python play.py
-    python play.py --auto
-    python play.py --auto --secret parka
-    python play.py --today
-"""
-
 import sys
 import os
 import random

@@ -1,14 +1,3 @@
-"""
-state.py
-Defines the agent state S = (V, H) as described in the project proposal.
-
-V  – Vocabulary remaining: set of candidate words still consistent with all feedback.
-H  – History: list of (word, pattern) tuples where pattern is a list of 5 colors:
-     'green'  – correct letter, correct position
-     'yellow' – correct letter, wrong position
-     'gray'   – letter not in the word
-"""
-
 from dataclasses import dataclass, field
 from typing import Optional
 
@@ -44,12 +33,6 @@ class AgentState:
 
 
 def get_pattern(guess: str, answer: str) -> Pattern:
-    """
-    Simulate the Wordle color feedback for a guess against a known answer.
-    Handles duplicate letters the same way Wordle does:
-      - Green locks a position first.
-      - Remaining yellows are limited by unmatched letter counts in the answer.
-    """
     guess = guess.lower()
     answer = answer.lower()
     pattern: Pattern = ["gray"] * 5
@@ -73,8 +56,4 @@ def get_pattern(guess: str, answer: str) -> Pattern:
 
 
 def filter_vocabulary(vocabulary: list[str], guess: str, pattern: Pattern) -> list[str]:
-    """
-    Remove from vocabulary every word that is inconsistent with the
-    (guess, pattern) feedback. Returns the filtered list.
-    """
     return [word for word in vocabulary if get_pattern(guess, word) == pattern]
